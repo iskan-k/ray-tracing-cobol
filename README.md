@@ -8,13 +8,22 @@ Four spheres orbit over a checkerboard floor. Each pixel is a traced ray with up
 
 ## Run it
 
+Install GnuCOBOL (tested with 3.1.2 and 3.2) and, for video, ffmpeg:
+
+```sh
+brew install gnucobol ffmpeg            # macOS
+sudo apt install gnucobol ffmpeg        # Debian, Ubuntu
+```
+
+Then build and run:
+
 ```sh
 cobc -x -O2 -fno-binary-truncate -o raytrace raytrace.cob
 ./raytrace live 140 45 120      # COLS ROWS SECONDS
 ./render.sh                     # 1920x1080, 360 frames (12 s), all cores
 ```
 
-Live mode needs a truecolor terminal. `render.sh` needs ffmpeg.
+Live mode needs a truecolor terminal.
 
 ## Speed
 
