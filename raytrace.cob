@@ -352,7 +352,11 @@
                COMPUTE F-V = (1 - (2 * SCR-Y + 1) / IMG-H) * F-TAN
                PERFORM VARYING SCR-X FROM 0 BY 1
                        UNTIL SCR-X >= IMG-W
-                   COMPUTE F-U = ((2 * SCR-X + 1) / IMG-W - 1)
+      *            NOT ((2X + 1) / W - 1). GNUCOBOL 3.1.2 RESCALES A
+      *            LITERAL IN PLACE WHEN IT IS ADDED TO OR SUBTRACTED
+      *            FROM A QUOTIENT, SO THE SHARED CONSTANT 1 WOULD GAIN
+      *            38 DIGITS PER PIXEL AND SLOW DOWN EVERY LATER "+ 1".
+                   COMPUTE F-U = (2 * SCR-X + 1 - IMG-W) / IMG-W
                                  * F-TAN * IMG-W / IMG-H
                    COMPUTE F-L = FUNCTION SQRT(F-U * F-U
                                  + F-V * F-V + 1)
